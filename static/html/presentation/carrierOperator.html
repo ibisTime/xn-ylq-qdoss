@@ -1,0 +1,863 @@
+<link rel="import" href="../head.html?__inline">
+<script src="../../js/reportDict.js"></script>
+<script src="../../js/app/presentation/carrierOperator.js"></script>
+<div class="report-place">
+    <ul>
+        <li>认证报告</li>
+        <li>运营商信息<span class="status"></span></li>
+    </ul>
+</div>
+
+<!--<div class="box report-box"><p>报告<span class="status" style="display: inline-block"></span></p></div>-->
+
+<!--<div style="display: none" class="box report-box">-->
+<div class="box report-box">
+    <div class="header">
+        <span class="fl">编号：<i id="code"></i></span>
+        <span class="fr">报告时间：<i id="validDatetime"></i></span>
+    </div>
+
+    <div class="tabbable">
+        <div class="title">
+            <h3>1.信息</h3>
+        </div>
+        <div class="table">
+            <h5 class="littleTItle">1.1用户基本信息</h5>
+            <div class="tabbox">
+                <table>
+                    <tbody id="searchResultTable">
+                    <tr>
+                        <td>姓名：<i id="cellPhone_carrier_name"></i></td>
+                        <td colspan="3">身份证号:<i id="cellPhone_carrier_idcard"></i></td>
+                    </tr>
+                    <tr>
+                        <td>姓名From客户：<i id="userBasic_name"></i></td>
+                        <td colspan="3">身份证号From客户：<i id="userBasic_id_card"></i></td>
+                    </tr>
+                    <tr>
+                        <td>手机号码：<i id="cellPhone_mobile"></i></td>
+                        <td>入网时长：<i id="cellPhone_in_time"></i> 月</td>
+                        <td>性别：<i id="userBasic_gender"></i></td>
+                        <td>年龄：<i id="userBasic_age"></i></td>
+                    </tr>
+                    <tr>
+                        <td>星座：<i id="userBasic_constellation"></i></td>
+                        <td>邮箱：<i id="cellPhone_email"></i></td>
+                        <td colspan="2">通讯地址：<i id="cellPhone_address"></i></td>
+                    </tr>
+                    <tr>
+                        <td>籍贯：<i id="userBasic_native_place"></i></td>
+                        <td>手机号码归属地：<i id="cellPhone_phone_attribution"></i></td>
+                        <td>居住地址：<i id="cellPhone_live_address"></i></td>
+                        <td>工作地址：</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">账户余额：<i id="cellPhone_available_balance">0</i>元</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 用户信息检测  联系人数据-->
+        <div class="table">
+            <h6 class="sort">用户信息检测(联系人数据)</h6>
+            <div class="tabbox">
+                <table>
+                    <tbody>
+                    <tr class="center ">
+                        <td rowspan="9"
+                            style="text-align: center;vertical-align: middle;width: 15%;border-bottom: none;">
+                            用户查询信息
+                        </td>
+                        <td style="width: 25%">查询过该用户的相关企业数量</td>
+                        <td><i id="userInfoCheck_search_searched_org_cnt"></i></td>
+                    </tr>
+                    <tr class="center">
+                        <td>查询过该用户的相关企业类型</td>
+                        <td class="userinfocheck"><i id="userInfoCheck_search_searched_org_type"></i></td>
+                    </tr>
+                    <tr class="center">
+                        <td>身份证组合过的其他姓名</td>
+                        <td class="userinfocheck"><i id="userInfoCheck_search_idcard_with_other_names"></i></td>
+                    </tr>
+                    <tr class="center">
+                        <td>身份证组合过其他电话</td>
+                        <td class="userinfocheck"><i id="userInfoCheck_search_idcard_with_other_phones"></i></td>
+                    </tr>
+                    <tr class="center">
+                        <td>电话号码组合过其他姓名</td>
+                        <td class="userinfocheck"><i id="userInfoCheck_search_phone_with_other_names"></i></td>
+                    </tr>
+                    <tr class="center">
+                        <td>电话号码组合过其他身份证</td>
+                        <td class="userinfocheck"><i id="userInfoCheck_search_phone_with_other_idcards"></i></td>
+                    </tr>
+                    <tr class="center">
+                        <td>电话号码注册过的相关企业数量</td>
+                        <td><i id="userInfoCheck_search_register_org_cnt"></i></td>
+                    </tr>
+                    <tr class="center">
+                        <td>电话号码注册过的相关企业类型</td>
+                        <td class="userinfocheck"><i id="userInfoCheck_search_register_org_type"></i></td>
+                    </tr>
+                    <tr class="center">
+                        <td>电话号码出现过的公开信息网站</td>
+                        <td class="userinfocheck"><i id="userInfoCheck_search_arised_open_web"></i></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 用户信息检测  黑名单-->
+        <div class="table">
+            <h6 class="sort">用户信息检测(黑名单)</h6>
+            <div class="tabbox">
+                <table>
+                    <tbody>
+                    <tr class="center">
+                        <td rowspan="6" class="hideborder"
+                            style="text-align: center;vertical-align: middle;width: 15%;border-bottom: none;">
+                            黑名单信息
+                        </td>
+                        <td style="width: 25%">黑中介分数</td>
+                        <td><i id="checkBlackInfo_phone_gray_score"></i> (分数范围0-100，40分以下为高危人群)</td>
+                    </tr>
+                    <tr class="center">
+                        <td>直接联系人中黑名单人数</td>
+                        <td><i id="checkBlackInfo_contacts_class1_blacklist_cnt"></i> (直接联系人：和被查询号码有通话记录)</td>
+                    </tr>
+                    <tr class="center">
+                        <td>间接联系人中黑名单人数</td>
+                        <td><i id="checkBlackInfo_contacts_class2_blacklist_cnt"></i> (和被查询人的直接联系人有通话记录)</td>
+                    </tr>
+                    <tr class="center">
+                        <td>直接联系人人数</td>
+                        <td><i id="checkBlackInfo_contacts_class1_cnt"></i> (直接联系人：和被查询号码有通话记录)</td>
+                    </tr>
+                    <tr class="center">
+                        <td>引起黑名单的直接联系人数量</td>
+                        <td><i id="checkBlackInfo_contacts_router_cnt"></i> (直接联系人有和黑名单用户的通讯记录的号码数量)</td>
+                    </tr>
+                    <tr class="center">
+                        <td>直接联系人中引起间接黑名单占比</td>
+                        <td><i id="checkBlackInfo_contacts_router_ratio"></i> (直接联系人有和黑名单用户的通讯记录的号码数量在直接联系人数量中的百分比)</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--table2-->
+        <div class="table">
+            <h5 class="littleTItle">1.2 数据来源</h5>
+            <div class="tabbox">
+                <table id="table_report">
+                    <thead>
+                    <tr class="center">
+                        <th>来源名称</th>
+                        <th>数据类别</th>
+                        <th>获取时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--table3-->
+        <div class="table">
+            <h5 class="littleTItle">1.3信息校验</h5>
+            <div class="tabbox">
+                <table id="table_basic_check_items">
+                    <thead>
+                    <tr>
+                        <th class="left">检查项</th>
+                        <th>结果</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>身份证号码有效性</td>
+                        <td class="td1_1"></td>
+                    </tr>
+                    <tr>
+                        <td>邮箱有效性</td>
+                        <td class="td2_1"></td>
+                    </tr>
+                    <tr>
+                        <td>通讯地址有效性</td>
+                        <td class="td3_1"></td>
+                    </tr>
+                    <tr>
+                        <td>身份证号码是否与运营商数据匹配</td>
+                        <td class="td4_1"></td>
+                    </tr>
+                    <tr>
+                        <td>姓名是否与运营商数据匹配</td>
+                        <td class="td5_1"></td>
+                    </tr>
+                    <tr>
+                        <td>通话记录完整性</td>
+                        <td class="td6_1"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--table4-->
+        <div class="table">
+            <h5 class="littleTItle">1.4社交分析摘要</h5>
+            <h6 class="sort">朋友圈</h6>
+            <div class="tabbox">
+                <table id="table_friend_circle_summary">
+                    <thead>
+                    <tr>
+                        <th class="left">魔蝎变量</th>
+                        <th>近3月</th>
+                        <th>近6月</th>
+                        <th>备注</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>朋友圈大小</td>
+                        <td class="td1_1"></td>
+                        <td class="td1_2"></td>
+                        <td class="center">近3/6月联系号码数</td>
+                    </tr>
+                    <tr>
+                        <td>朋友圈亲密度</td>
+                        <td class="td2_1"></td>
+                        <td class="td2_2"></td>
+                        <td class="center">近3/6月联系十次以上的号码数量</td>
+                    </tr>
+                    <tr>
+                        <td>朋友圈中心地</td>
+                        <td class="td3_1"></td>
+                        <td class="td3_2"></td>
+                        <td class="center">近3/6月联系次数最多的归属地</td>
+                    </tr>
+                    <tr>
+                        <td>朋友圈是否在本地</td>
+                        <td class="td4_1"></td>
+                        <td class="td4_2"></td>
+                        <td class="center">近3/6月朋友圈中心地是否与手机归属地一致</td>
+                    </tr>
+                    <tr>
+                        <td>互通电话的号码数目</td>
+                        <td class="td5_1"></td>
+                        <td class="td5_2"></td>
+                        <td class="center">近3/6月互有主叫和被叫的联系人电话号码数目(去重)</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table">
+            <h6 class="sort">联系人Top3 (近3月通话次数降序)</h6>
+            <div class="tabbox">
+                <table id="table_friend_circle_peer_top3_3m">
+                    <thead>
+                    <tr class="center">
+                        <th>号码</th>
+                        <th>归属地</th>
+                        <th>通话次数</th>
+                        <th>通话时长(秒)</th>
+                        <th>主叫次数</th>
+                        <th>被叫次数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="table">
+            <h6 class="sort">联系人Top3 (近6月通话次数降序)</h6>
+            <div class="tabbox">
+                <table id="table_friend_circle_peer_top3_6m">
+                    <thead>
+                    <tr class="center">
+                        <th>号码</th>
+                        <th>归属地</th>
+                        <th>通话次数</th>
+                        <th>通话时长(秒)</th>
+                        <th>主叫次数</th>
+                        <th>被叫次数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table">
+            <h6 class="sort">联系人号码归属地Top3 (近3月通话次数降序)</h6>
+            <div class="tabbox">
+                <table id="table_friend_circle_loc_top3_3m">
+                    <thead>
+                    <tr class="center">
+                        <th>地址</th>
+                        <th>通话次数</th>
+                        <th>通话号码数</th>
+                        <th>通话时长(秒)</th>
+                        <th>主叫次数</th>
+                        <th>被叫次数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="table">
+            <h6 class="sort">联系人号码归属地Top3 (近6月通话次数降序)</h6>
+            <div class="tabbox">
+                <table id="table_friend_circle_loc_top3_6m">
+                    <thead>
+                    <tr class="center">
+                        <th>地址</th>
+                        <th>通话次数</th>
+                        <th>通话号码数</th>
+                        <th>通话时长(秒)</th>
+                        <th>主叫次数</th>
+                        <th>被叫次数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--table5-->
+        <div class="table">
+            <h5 class="littleTItle">1.5 风险分析摘要</h5>
+            <h6 class="sort">风险识别</h6>
+            <div class="tabbox">
+                <table id="table_basic_check_items_info">
+                    <thead>
+                    <tr>
+                        <th class="left">魔蝎变量</th>
+                        <th>近3月</th>
+                        <th>近6月</th>
+                        <th>备注</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>号码沉默度</td>
+                        <td class="info1_1"></td>
+                        <td class="info1_2"></td>
+                        <td>满分10分</td>
+                    </tr>
+                    <tr>
+                        <td>欠费风险度</td>
+                        <td class="info2_1"></td>
+                        <td class="info2_2"></td>
+                        <td>满分10分</td>
+                    </tr>
+                    <tr>
+                        <td>亲情网风险度</td>
+                        <td class="info3_1"></td>
+                        <td class="info3_2">--</td>
+                        <td>满分10分</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tabbox">
+                <table id="table_basic_check_items_result">
+                    <thead>
+                    <tr>
+                        <th class="left" style="width: 71.95%;">魔蝎变量</th>
+                        <th>结果</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>申请人姓名+身份证号码是否出现在法院黑名单</td>
+                        <td class="result1"></td>
+                    </tr>
+                    <tr>
+                        <td>申请人姓名+身份证号码是否出现在金融机构黑名单</td>
+                        <td class="result2"></td>
+                    </tr>
+                    <tr>
+                        <td>申请人姓名+手机号码是否出现在金融机构黑名单</td>
+                        <td class="result3"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="table">
+            <h6 class="sort">风险联系</h6>
+            <div class="tabbox">
+                <table id="table_call_risk_analysis_contact">
+                    <thead>
+                    <tr class="center">
+                        <th>号码类别</th>
+                        <th>近3月通话次数</th>
+                        <th>近6月通话次数</th>
+                        <th>近3月通话时长(秒)</th>
+                        <th>近6月通话时长(秒)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--table6-->
+        <div class="table">
+            <h5 class="littleTItle">1.6 活跃分析摘要</h5>
+            <h6 class="sort">活跃识别</h6>
+            <div class="tabbox">
+                <table id="table_active_degree_active">
+                    <thead>
+                        <tr>
+                            <th class="left">魔蝎变量</th>
+                            <th>近3月</th>
+                            <th>近6月</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--table7-->
+        <div class="table">
+            <h5 class="littleTItle">1.7 消费分析摘要</h5>
+            <h6 class="sort">消费识别</h6>
+            <div class="tabbox">
+                <table id="table_consumption_detail_recognition">
+                    <thead>
+                        <tr>
+                            <th class="left">魔蝎变量</th>
+                            <th>近3月</th>
+                            <th>近6月</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="table">
+            <h6 class="sort"> 消费细类统计</h6>
+            <div class="tabbox">
+                <table id="table_consumption_detail_statistics">
+                    <thead>
+                    <tr class="center">
+                        <th>消费类别</th>
+                        <th>近1月</th>
+                        <th>近3月</th>
+                        <th>近6月</th>
+                        <th>近3月月均</th>
+                        <th>近6月月均</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table">
+            <h6 class="sort"> 运营商消费数据</h6>
+            <div class="tabbox">
+                <table id="table_cell_behavior">
+                    <thead>
+                    <tr class="center">
+                        <th>运营商</th>
+                        <th>号码</th>
+                        <th>归属地</th>
+                        <th>月份</th>
+                        <th>呼叫次数</th>
+                        <th>主叫次数</th>
+                        <th>主叫时间(分)</th>
+                        <th>被叫次数</th>
+                        <th>被叫时间(分)</th>
+                        <th>短信数量</th>
+                        <th>话费消费(元)</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table">
+            <h5 class="littleTItle">1.8 漫游分析摘要(近6月漫游天数降序)</h5>
+            <div class="tabbox">
+                <table id="table_roam_analysis">
+                    <thead>
+                    <tr class="center">
+                        <th>漫游地</th>
+                        <th>近3月漫游天数</th>
+                        <th>近6月漫游天数</th>
+                        <th>近3月最大连续漫游天数</th>
+                        <th>近6月最大连续漫游天数</th>
+                        <th>近3月连续漫游1天以上的次数</th>
+                        <th>近6月连续漫游1天以上的次数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--table8-->
+        <div class="title">
+            <h3>2.通话社交</h3>
+        </div>
+        <div class="table">
+            <h5 class="littleTItle">2.1 总体统计</h5>
+            <div class="tabbox">
+                <table id="table_active_degree_statistics">
+                    <thead>
+                        <tr>
+                            <th class="left">魔蝎变量</th>
+                            <th>近1月</th>
+                            <th>近3月</th>
+                            <th>近6月</th>
+                            <th>近3月月均</th>
+                            <th>近6月月均</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <!--table9-->
+        <div class="table">
+            <h5 class="littleTItle">2.2 详细统计</h5>
+            <h6 style="clear:both" class="sort">联系人</h6>
+            <div class="tabbox longTabbox">
+                <table id="table_call_contact_detail">
+                    <thead>
+                        <tr class="center">
+                        <th>号码</th>
+                        <th>号码标识</th>
+                        <th>号码类型</th>
+                        <th>归属地</th>
+                        <th>近一周通话次数</th>
+                        <th>近一月通话次数</th>
+                        <th>近三月通话次数</th>
+                        <th>近六月通话次数</th>
+                        <th>近三月通话时长(秒)</th>
+                        <th>近六月通话时长(秒)</th>
+                        <th>近三月主叫次数</th>
+                        <th>近六月主叫次数</th>
+                        <th>近三月被叫次数</th>
+                        <th>近六月被叫次数</th>
+                        <th>近三月早上(5:30-11:30)通话次数</th>
+                        <th>近六月早上(5:30-11:30)通话次数</th>
+                        <th>近三月中午(11:30-13:30)通话次数</th>
+                        <th>近六月中午(11:30-13:30)通话次数</th>
+                        <th>近三月下午(13:30-17:30)通话次数</th>
+                        <th>近六月下午(13:30-17:30)通话次数</th>
+                        <th>近三月晚上(17:30-23:30)通话次数</th>
+                        <th>近六月晚上(17:30-23:30)通话次数</th>
+                        <th>近三月凌晨(23:30-5:30)通话次数</th>
+                        <th>近六月凌晨(23:30-5:30)通话次数</th>
+                        <th>近三月工作日通话次数</th>
+                        <th>近六月工作日通话次数</th>
+                        <th>近三月周末通话次数</th>
+                        <th>近六月周末通话次数</th>
+                        <th>近三月节假日通话次数</th>
+                        <th>近六月节假日通话次数</th>
+                        <th>近三月是否有全天联系</th>
+                        <th>近六月是否有全天联系</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="table">
+            <h6 class="sort">通话时段(近三月)</h6>
+            <div class="tabbox">
+                <table id="table_call_duration_detail_3m">
+                    <thead>
+                    <tr class="center">
+                        <th>通话时段</th>
+                        <th>通话次数</th>
+                        <th>通话号码数</th>
+                        <th>通话时长(秒)</th>
+                        <th>主叫次数</th>
+                        <th>被叫次数</th>
+                        <th>主叫时长(秒)</th>
+                        <th>被叫时长(秒)</th>
+                        <th>最后一次通话时间</th>
+                        <th>第一次通话时间</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="table">
+            <h6 class="sort">通话时段(近六月)</h6>
+            <div class="tabbox">
+                <table id="table_call_duration_detail_6m">
+                    <thead>
+                    <tr class="center">
+                        <th>通话时段</th>
+                        <th>通话次数</th>
+                        <th>通话号码数</th>
+                        <th>通话时长(秒)</th>
+                        <th>主叫次数</th>
+                        <th>被叫次数</th>
+                        <th>主叫时长(秒)</th>
+                        <th>被叫时长(秒)</th>
+                        <th>最后一次通话时间</th>
+                        <th>第一次通话时间</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="table">
+            <h6 class="sort"> 联系人手机号码归属地 (近3月联系次数降序)</h6>
+            <div class="tabbox">
+                <table id="table_contact_region_3m">
+                    <thead>
+                    <tr>
+                        <th>地址</th>
+                        <th>通话次数</th>
+                        <th>通话号码数</th>
+                        <th>通话时长(秒)</th>
+                        <th>主叫次数</th>
+                        <th>被叫次数</th>
+                        <th>主叫时长(秒)</th>
+                        <th>被叫时长(秒)</th>
+                        <th>平均主叫时长(秒)</th>
+                        <th>平均被叫时长(秒)</th>
+                        <th>主叫次数比重</th>
+                        <th>被叫次数比重</th>
+                        <th>主叫时长比重</th>
+                        <th>被叫时长比重</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="table">
+            <h6 class="sort"> 联系人手机号码归属地 (近6月联系次数降序)</h6>
+            <div class="tabbox">
+                <table id="table_contact_region_6m">
+                    <thead>
+                    <tr>
+                        <th>地址</th>
+                        <th>通话次数</th>
+                        <th>通话号码数</th>
+                        <th>通话时长(秒)</th>
+                        <th>主叫次数</th>
+                        <th>被叫次数</th>
+                        <th>主叫时长(秒)</th>
+                        <th>被叫时长(秒)</th>
+                        <th>平均主叫时长(秒)</th>
+                        <th>平均被叫时长(秒)</th>
+                        <th>主叫次数比重</th>
+                        <th>被叫次数比重</th>
+                        <th>主叫时长比重</th>
+                        <th>被叫时长比重</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <!--table10-->
+        <div class="table">
+            <h5 class="littleTItle">2.3 通话时间详细统计</h5>
+            <div class="tabbox">
+                <table id="table_call_time_detail">
+                    <thead>
+                    <tr>
+                        <th class="left">魔蝎变量</th>
+                        <th>近1月</th>
+                        <th>近3月</th>
+                        <th>近6月</th>
+                        <th>近3月月均</th>
+                        <th>近6月月均</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+        </div>
+        <!--table11-->
+        <div class="title">
+            <h3>3.风险状况</h3>
+        </div>
+        <div class="table">
+            <h5 class="littleTItle">3.1 风险统计</h5>
+            <div class="tabbox">
+                <table id="table_call_risk_analysis">
+                    <thead>
+                    <tr>
+                        <th class="left">魔蝎变量</th>
+                        <th>近1月</th>
+                        <th>近3月</th>
+                        <th>近6月</th>
+                        <th>近3月月均</th>
+                        <th>近6月月均</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <!--table12-->
+        <div class="table">
+            <h5 class="littleTItle">3.2 稳定性</h5>
+            <div class="tabbox">
+                <table id="table_call_family_detail">
+                    <thead>
+                    <tr>
+                        <th class="left">魔蝎变量</th>
+                        <th>近1月</th>
+                        <th>近3月</th>
+                        <th>近6月</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="table">
+            <h6 class="sort">常用服务</h6>
+            <div class="tabbox">
+                <table id="table_call_service_analysis">
+                    <thead>
+                    <tr class="center">
+                        <th>服务类型</th>
+                        <th>近1月</th>
+                        <th>近3月</th>
+                        <th>近6月</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="table">
+            <h6 class="sort">与服务号通话详情 (按月统计)</h6>
+            <div class="tabbox">
+                <table id="table_main_service">
+                    <thead>
+                    <tr class="center">
+                        <th>服务号码</th>
+                        <th>月份</th>
+                        <th>通话次数</th>
+                        <th>通话时长(秒)</th>
+                        <th>主叫次数</th>
+                        <th>被叫次数</th>
+                        <th>主叫时长(秒)</th>
+                        <th>被叫时长(秒)</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <!--table13-->
+        <div class="title">
+            <h3>4.活跃程度</h3>
+        </div>
+        <div class="table">
+            <h5 class="littleTItle">4.1 通话活跃</h5>
+            <div class="tabbox">
+                <table id="table_active_degree">
+                    <thead>
+                    <tr>
+                        <th class="left">魔蝎变量</th>
+                        <th>近1月</th>
+                        <th>近3月</th>
+                        <th>近6月</th>
+                        <th>近3月月均</th>
+                        <th>近6月月均</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <!--table13-->
+        <div class="title">
+            <h3>5.消费情况</h3>
+        </div>
+        <div class="table">
+            <h5 class="littleTItle">5.1 消费统计</h5>
+            <div class="tabbox">
+                <table id="table_consumption_detail">
+                    <thead>
+                    <tr>
+                        <th class="left">魔蝎变量</th>
+                        <th>近1月</th>
+                        <th>近3月</th>
+                        <th>近6月</th>
+                        <th>近3月月均</th>
+                        <th>近6月月均</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <!--table14-->
+        <div class="title">
+            <h3>6.漫游详情统计</h3>
+        </div>
+        <div class="table">
+            <h5 class="littleTItle">6.1 漫游详情统计(近6月漫游日期降序)</h5>
+            <div class="tabbox">
+                <table id="table_roam_detail">
+                    <thead>
+                    <tr>
+                        <th>漫游日期</th>
+                        <th>漫游城市</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="title">
+            <h3>7.运营商出行分析</h3>
+        </div>
+        <div class="table">
+            <h5 class="littleTItle">7.1 出行数据分析</h5>
+            <div class="tabbox">
+                <table id="table_trip_info">
+                    <thead>
+                    <tr class="center hideborder" style="text-align: center">
+                        <th>出发地</th>
+                        <th>目的地</th>
+                        <th>出发时间</th>
+                        <th>结束时间</th>
+                        <th>类型</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="import" href="./foot.html?__inline">

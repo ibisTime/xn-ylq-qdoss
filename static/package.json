@@ -1,0 +1,17 @@
+{
+  "name": "xn-cd_data-oss",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fis-conf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "fis3 release -d ../dist",
+    "start": "fis3 release -d ../dist -w",
+    "build": "fis3 release -d /usr/local/Cellar/nginx/1.15.0/html/ylq-boss prod"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fis3-postpackager-loader": "^2.1.4"
+  }
+}
